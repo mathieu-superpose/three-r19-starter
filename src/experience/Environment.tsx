@@ -1,4 +1,4 @@
-import { PerspectiveCamera } from "@react-three/drei"
+import { OrbitControls, PerspectiveCamera } from "@react-three/drei"
 
 function Environment() {
   return (
@@ -7,6 +7,7 @@ function Environment() {
       <directionalLight position={[5, 5, 5]} />
       
       <PerspectiveCamera makeDefault position={[0, 0, 5]} />
+      <OrbitControls />
     </>
   )
 }
