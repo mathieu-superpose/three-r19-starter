@@ -14,12 +14,20 @@ const CrownMaterial = shaderMaterial(
 
 extend({ CrownMaterial })
 
-function Crown() {
+function Crown({
+  ambientLightIntensity = 0.5,
+  directionalLightPosition = new THREE.Vector3(5, 5, 5),
+}: {
+  ambientLightIntensity?: number
+  directionalLightPosition?: THREE.Vector3
+}) {
   const material = useMemo(() => {
     const mat = new CrownMaterial()
-    mat.uniforms.uColor.value = new THREE.Color("yellow")
+    mat.uniforms.uColor = new THREE.Uniform(new THREE.Color("yellow"))
+    mat.uniforms.uAmbient = new THREE.Uniform(ambientLightIntensity)
+    mat.uniforms.uLightPosition = new THREE.Uniform(directionalLightPosition)
     return mat
-  }, [])
+  }, [ambientLightIntensity, directionalLightPosition])
 
   useFrame(({ clock }) => {
     material.uniforms.uTime.value = clock.getElapsedTime()
